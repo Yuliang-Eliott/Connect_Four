@@ -59,6 +59,7 @@ class ConnectFour:
         if self.check_win(row, col, self.current_player):
             print(f'Player{self.current_player} wins')
             self.game_over = True
+            self.print_board()
             return True
 
         self.print_board()
@@ -70,8 +71,13 @@ class ConnectFour:
 
     def play(self):
         self.reset()
-        choice = input("Who goes first? Player 1 or Player 2: ")
-        self.current_player = int(choice)
+        while True:
+            choice = input("Who goes first? Player 1 or Player 2: ")
+            if int(choice) in [1,2]:
+                self.current_player = int(choice)
+                break
+            else:
+                print("Please enter a valid number!")
 
         while not self.game_over:
             col = int(input(f'Player{self.current_player} make selection(0-6):'))
